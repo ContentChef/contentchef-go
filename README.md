@@ -111,7 +111,7 @@ chOnline := cf.GetOnlineChannel("your_channel", "super_secret")
 // A PreviewChannel will query only the published content with a staging state
 chPreview := cf.GetPreviewChannel(cf, "your_channel", "staging")
 
-conf := &channel.GetContentOptions{
+conf := &contentchef.GetContentOptions{
     PublicID: "my_public_id",
 }
 
@@ -122,7 +122,6 @@ conf := &channel.GetContentOptions{
 myContent, _, err := ch.GetContent(context.TODO(), conf)
 
 // Here is the GetContent confuguration object.
-// channel.GetContentOptions
 // ContentOptions specifies the parameters to the Channel's Content method.
 type ContentOptions struct {
 	LegacyMetadata bool `url:"legacyMetadata,omitempty"`
@@ -130,9 +129,10 @@ type ContentOptions struct {
 	PublicID string `url:"publicId"`
 }
 
-searchConf := &channel.SearchOptions{
+searchConf := &contentchef.SearchOptions{
 	Take:    10,
-    Sorting: []chan
+	[]contentchef.SortingField{{FieldName: "publicId", Ascending: false}},
+}
 
 // will retrieve from the channel website a single content
 // Search accepts two parametrs.
@@ -141,7 +141,7 @@ searchConf := &channel.SearchOptions{
 myPaginatedResponse, err := ch.Search(context.TODO(), conf)
 
 //Here is the Search configuration object
-// Search Options specifies the parameters to the Channel's and Online Channel's Search method.
+// Search Options specifies the parameters to the Channel's and OnlineChannel's Search method.
 type SearchOptions struct {
 	// The offset you want to have in the search result.
 	Skip int `url:"skip"`
