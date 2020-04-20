@@ -10,8 +10,6 @@ import (
 	"time"
 )
 
-// ContentOptions specifies the parameters to the Channel's and Online Channel's Content method.
-
 // Response response represents a ContentChef content.
 type Response struct {
 	PublicID       string         `json:"publicId"`
