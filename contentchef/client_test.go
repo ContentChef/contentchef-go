@@ -26,12 +26,11 @@ var (
 func setup() {
 	mux = http.NewServeMux()
 	server = httptest.NewServer(mux)
+	myDate := time.Now()
 	opt := &ClientOptions{
-		BaseURL: server.URL + "/",
-		SpaceID: "my_space",
-		TargetDateResolver: func() string {
-			return time.Now().Format(time.RFC3339)
-		},
+		BaseURL:    server.URL + "/",
+		SpaceID:    "my_space",
+		TargetDate: myDate,
 	}
 	client, _ = NewClient(opt)
 }

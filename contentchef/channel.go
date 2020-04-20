@@ -197,7 +197,7 @@ type PreviewChannel struct {
 }
 
 // PreviewChannel retrurns a preview channel reference
-// that are not visibile in the current date.
+// It will retrieve for contents that are not visibile in the current date.
 //
 // It takes the name and the apiKey used to communicate with preview channels, and the publishing status of
 // the content you want to retrieve.
@@ -210,9 +210,6 @@ func (c *Client) PreviewChannel(name, apiKey, state string) (*PreviewChannel, er
 	}
 	if state != "live" && state != "staging" {
 		return nil, errors.New("`State must be either 'live' or 'staging")
-	}
-	if c.TargetDateResolver == nil {
-		return nil, errors.New("To get a preview channel contentChef.targetDateResolver must be setted")
 	}
 	return &PreviewChannel{
 		client: c,
@@ -231,7 +228,10 @@ func (c *Client) PreviewChannel(name, apiKey, state string) (*PreviewChannel, er
 func (s *PreviewChannel) Content(ctx context.Context, config *ContentOptions) (*Response, error) {
 	path := getPreviewEndpoint(s.client.SpaceID, "content", s.name, s.state)
 
-	targetDate := s.client.TargetDateResolver()
+	var targetDate string
+	if !s.client.TargetDate.IsZero() {
+		targetDate = s.client.TargetDate.Format(time.RFC3339)
+	}
 	urlParams := struct {
 		ContentOptions
 		TargetDate string `url:"targetDate,omitempty"`
@@ -254,7 +254,10 @@ func (s *PreviewChannel) Content(ctx context.Context, config *ContentOptions) (*
 func (s *PreviewChannel) Search(ctx context.Context, config *SearchOptions) (*PaginatedResponse, error) {
 	path := getPreviewEndpoint(s.client.SpaceID, "search/v2", s.name, s.state)
 
-	targetDate := s.client.TargetDateResolver()
+	var targetDate string
+	if !s.client.TargetDate.IsZero() {
+		targetDate = s.client.TargetDate.Format(time.RFC3339)
+	}
 	urlParams := struct {
 		SearchOptions
 		TargetDate string `url:"targetDate,omitempty"`

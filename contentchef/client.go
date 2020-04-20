@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"time"
 
 	"github.com/google/go-querystring/query"
 )
@@ -21,16 +22,12 @@ const (
 	mediaType      = "application/json"
 )
 
-// TargetDateResolver is used to retrieve contents in the preview channel in a specific dare different from the current date
-// a valid targetDateResolver must return a valid date expressed using the ISO format like  2019-08-16T12:22:232Z
-type TargetDateResolver func() string
-
 // Client manages the communication with the ContenChef API.
 type Client struct {
-	httpClient         *http.Client
-	BaseURL            *url.URL
-	SpaceID            string
-	TargetDateResolver TargetDateResolver
+	httpClient *http.Client
+	BaseURL    *url.URL
+	SpaceID    string
+	TargetDate time.Time
 }
 
 // ClientOptions is the configuration object passed to the Client constructor
@@ -40,8 +37,9 @@ type ClientOptions struct {
 	// Your Content Chef SpaceID REQUIRED
 	SpaceID string
 	// If you don't want to use the default HTTP client you can set a custom one
-	Client             *http.Client
-	TargetDateResolver TargetDateResolver
+	Client *http.Client
+	// TargetDate is used to retrieve contents in the preview channel in a specific dare different from the current date
+	TargetDate time.Time
 }
 
 // NewClient return a new Client reference
@@ -63,7 +61,7 @@ func NewClient(o *ClientOptions) (*Client, error) {
 		httpClient,
 		BaseURL,
 		o.SpaceID,
-		o.TargetDateResolver,
+		o.TargetDate,
 	}
 	return cf, nil
 }

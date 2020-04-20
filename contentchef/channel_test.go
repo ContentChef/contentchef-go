@@ -5,6 +5,7 @@ import (
 	"net/url"
 	"reflect"
 	"testing"
+	"time"
 )
 
 func Test_serializeSorting(t *testing.T) {
@@ -116,10 +117,10 @@ func Test_getPreviewEndpoint(t *testing.T) {
 func TestClient_OnlineChannel(t *testing.T) {
 	setup()
 	type fields struct {
-		httpClient         *http.Client
-		BaseURL            *url.URL
-		SpaceID            string
-		TargetDateResolver TargetDateResolver
+		httpClient *http.Client
+		BaseURL    *url.URL
+		SpaceID    string
+		TargetDate time.Time
 	}
 	type args struct {
 		name   string
@@ -180,28 +181,17 @@ func TestClient_OnlineChannel(t *testing.T) {
 
 func TestClient_PreviewChannel(t *testing.T) {
 	setup()
-	//myURL, _ := url.Parse("/foo")
 	type fields struct {
 		httpClient *http.Client
 		BaseURL    *url.URL
 		SpaceID    string
-		TargetDateResolver
+		TargetDate time.Time
 	}
 	type args struct {
 		name   string
 		apiKey string
 		state  string
 	}
-	/*
-		myClient := &Client{
-			BaseURL:    myURL,
-			httpClient: http.DefaultClient,
-			SpaceID:    "mySpace",
-			TargetDateResolver: func() string {
-				return time.Now().Format(time.RFC3339)
-			},
-		}
-	*/
 	tests := []struct {
 		name    string
 		fields  fields

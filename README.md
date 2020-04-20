@@ -41,8 +41,7 @@ _, cf := contentchef.New(opt)
 Here are the fields of the configuration that can be passed to the Constructor
 
 ```go
-// contentchef.Options
-
+// contentchef.ClientOptions
 type Options struct {
 	// REQUIRED The base url of your contentchef instance
 	BaseUrl string
@@ -52,9 +51,8 @@ type Options struct {
 	SpaceID string
 	// The http client to communicate with the ContentChef API
 	Client *http.Client
-	//targetDateResolver is used to retrieve contents in the preview channel in a specific dare different from the current date
-	// a valid targetDateResolver must return a valid date expressed using the ISO format like 2019-08-16T12:22:232Z
-	TargetDateResolver func() string
+	// TargetDate is used to retrieve contents in the preview channel in a specific dare different from the current date
+	TargetDate time.Time
 }
 ```
 
@@ -109,7 +107,7 @@ _, cf := contentchef.New(opt)
 chOnline := cf.GetOnlineChannel("your_channel", "super_secret")
 
 // A PreviewChannel will query only the published content with a staging state
-chPreview := cf.GetPreviewChannel(cf, "your_channel", "staging")
+chPreview := cf.GetPreviewChannel("your_channel", "staging")
 
 conf := &contentchef.GetContentOptions{
     PublicID: "my_public_id",
