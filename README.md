@@ -109,7 +109,7 @@ _, cf := contentchef.New(opt)
 chOnline := cf.GetOnlineChannel("your_channel", "super_secret")
 
 // A PreviewChannel will query only the published content with a staging state
-chPreview := cf.GetPreviewChannel(cf, "your_channel", "STAGING")
+chPreview := cf.GetPreviewChannel(cf, "your_channel", "staging")
 
 conf := &channel.GetContentOptions{
     PublicID: "my_public_id",
@@ -161,5 +161,4 @@ type SearchOptions struct {
 	Sorting Sorting `url:"sorting,omitempty"`
 }
 
-}
 ```
