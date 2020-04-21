@@ -114,7 +114,7 @@ func Test_getPreviewEndpoint(t *testing.T) {
 	}
 }
 
-func TestClient_OnlineChannel(t *testing.T) {
+func TestClient_GetOnlineChannel(t *testing.T) {
 	setup()
 	type fields struct {
 		httpClient *http.Client
@@ -167,19 +167,19 @@ func TestClient_OnlineChannel(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := client.OnlineChannel(tt.args.name, tt.args.apiKey)
+			got, err := client.GetOnlineChannel(tt.args.name, tt.args.apiKey)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Client.OnlineChannel() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Client.GetOnlineChannel() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Client.OnlineChannel() = %v, want %v", got, tt.want)
+				t.Errorf("Client.GetOnlineChannel() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func TestClient_PreviewChannel(t *testing.T) {
+func TestClient_GetPreviewChannel(t *testing.T) {
 	setup()
 	type fields struct {
 		httpClient *http.Client
@@ -247,13 +247,13 @@ func TestClient_PreviewChannel(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := client.PreviewChannel(tt.args.name, tt.args.apiKey, tt.args.state)
+			got, err := client.GetPreviewChannel(tt.args.name, tt.args.apiKey, tt.args.state)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("Client.OnlineChannel() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("Client.GetPreviewChannel() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Client.OnlineChannel() = %v, want %v", got, tt.want)
+				t.Errorf("Client.GetPreviewChannel() = %v, want %v", got, tt.want)
 			}
 		})
 	}

@@ -137,11 +137,11 @@ type OnlineChannel struct {
 	apiKey string
 }
 
-// OnlineChannel returns an OnlineChannel instance.
+// GetOnlineChannel returns an OnlineChannel instance.
 //
 // It takes the name and the apiKey used to communicate with online channels,
 // both fields must not be an empty string.
-func (c *Client) OnlineChannel(name, apiKey string) (*OnlineChannel, error) {
+func (c *Client) GetOnlineChannel(name, apiKey string) (*OnlineChannel, error) {
 	if name == "" {
 		return nil, errors.New("name seems to be an empty string")
 	}
@@ -196,12 +196,12 @@ type PreviewChannel struct {
 	state  string
 }
 
-// PreviewChannel retruns a preview channel reference
+// GetPreviewChannel retruns a preview channel reference
 // It will retrieve for contents that are not visible in the current date.
 //
 // It takes the name and the apiKey used to communicate with preview channels, and the publishing status of
 // the content you want to retrieve.
-func (c *Client) PreviewChannel(name, apiKey, state string) (*PreviewChannel, error) {
+func (c *Client) GetPreviewChannel(name, apiKey, state string) (*PreviewChannel, error) {
 	if name == "" {
 		return nil, errors.New("name seems to be an empty string")
 	}
