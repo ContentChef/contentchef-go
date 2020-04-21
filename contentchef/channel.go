@@ -61,12 +61,12 @@ type SearchOptions struct {
 	// A slice containing the publicIds of the content you want to retrieve
 	PublicID []string `url:"publicId,omitempty"`
 	// A slice containing the definitions of the content you want to retrieve
-	ContentDefinition []string `url:"contentDefiniton,omitempty"`
+	ContentDefinition []string `url:"contentDefinition,omitempty"`
 	Repositories      []string `url:"repositories,omitempty"`
 	LegacyMetadata    bool     `url:"legacyMetadata,omitempty"`
 	// A slice containing the tags of the content you want to retrieve
 	Tags []string `url:"tags,omitempty"`
-	// Proprerties filters you want to apply
+	// Properties filters you want to apply
 	PropFilters PropFilters `url:"propFilters,omitempty"`
 	// How you want to sort your content
 	Sorting Sorting `url:"sorting,omitempty"`
@@ -196,8 +196,8 @@ type PreviewChannel struct {
 	state  string
 }
 
-// PreviewChannel retrurns a preview channel reference
-// It will retrieve for contents that are not visibile in the current date.
+// PreviewChannel retruns a preview channel reference
+// It will retrieve for contents that are not visible in the current date.
 //
 // It takes the name and the apiKey used to communicate with preview channels, and the publishing status of
 // the content you want to retrieve.
