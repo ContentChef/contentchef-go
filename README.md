@@ -22,7 +22,7 @@ In order to use this SDK, you will need
 If you are using go modules you can just import the SDK in your codebase.
 
 ```go
-import "github.com/ContentChef/contentchef-go/contentchef"'*
+import "github.com/ContentChef/contentchef-go/contentchef"'
 
 ```
 
@@ -40,7 +40,7 @@ myOptions := &contentchef.Options{
     SpaceID: "yourContentChefSpaceID",
 }
 
-_, cf := contentchef.New(opt)
+cf, _ := contentchef.New(opt)
 
 ```
 
@@ -106,7 +106,7 @@ myOptions := &contentchef.ClientOptions{
     BaseURL: "https://api.contentchef.io/",
     SpaceID: "yourContentChefSpaceID",
 }
-_, cf := contentchef.New(opt)
+cf, _ := contentchef.New(opt)
 
 // An OnlineChannel will query only published contents in live state in the current date
 chOnline := cf.GetOnlineChannel("yourChannelName", "yourChannelAPIKey")
@@ -122,7 +122,7 @@ conf := &contentchef.GetContentOptions{
 // GetContent accepts two parameters.
 // A context object (if you are unsure about it use Context.TODO())
 // The GetContent configuration object.
-myContent, _, err := ch.GetContent(context.TODO(), conf)
+myContent, err := ch.GetContent(context.TODO(), conf)
 
 // Here is the GetContent configuration object.
 // ContentOptions specifies the parameters to the Channel's Content method.
