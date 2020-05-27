@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	libraryVersion = "1.0.1"
+	libraryVersion = "1.0.2"
 	userAgent      = "contentchef-go/" + libraryVersion
 	mediaType      = "application/json"
 )
@@ -202,7 +202,7 @@ func (c *Client) get(ctx context.Context, path, apiKey string, opts, v interface
 	if err != nil {
 		return err
 	}
-	req.Header.Set("X-SPACE-D-API-Key", apiKey)
+	req.Header.Set("X-Chef-Key", apiKey)
 
 	_, err = c.do(ctx, req, v)
 
