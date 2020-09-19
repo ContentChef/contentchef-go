@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	libraryVersion = "1.0.2"
+	libraryVersion = "1.0.3"
 	userAgent      = "contentchef-go/" + libraryVersion
 	mediaType      = "application/json"
 )
